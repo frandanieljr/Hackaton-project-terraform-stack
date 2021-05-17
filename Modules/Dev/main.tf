@@ -7,6 +7,7 @@ provider "aws" {
 #  source = "./Modules/Dev"
 #}
 
+
 data "template_file" "script" {
   template = "${file("${path.module}/script.sh.tpl")}"
   vars = {
@@ -46,7 +47,7 @@ resource "random_shuffle" "random_subnet" {
 
 
 resource "aws_elb" "web" {
-  name = "hackton-elb"
+  name = "hackton-elb-dev"
 
   subnets         = data.aws_subnet_ids.all.ids
   security_groups = ["${aws_security_group.allow-ssh.id}"]
